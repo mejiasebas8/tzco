@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeal 8 Co</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F8F6F0;
+            color: #2D2D2D;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Top Left - More Info Button */
+        .more-info-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: transparent;
+            border: 1px solid #2D2D2D;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #2D2D2D;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .more-info-btn:hover {
+            background-color: #2D2D2D;
+            color: #F8F6F0;
+        }
+
+        /* Top Right - Time Clock */
+        .time-clock {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2D2D2D;
+            font-family: 'Courier New', monospace;
+            z-index: 1000;
+        }
+
+        /* Particle Animation Container */
+        .particle-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            z-index: 1;
+        }
+
+        /* Bottom Center - Company Info */
+        .company-info {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .company-name {
+            font-size: 48px;
+            font-weight: 300;
+            color: #2D2D2D;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .company-locations {
+            font-size: 16px;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background-color: #F8F6F0;
+            padding: 60px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2D2D2D;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #2D2D2D;
+            letter-spacing: 1px;
+        }
+
+        .modal-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2D2D2D;
+            margin-bottom: 20px;
+        }
+
+        .modal-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .particle-container {
+                width: 90vw;
+                height: 50vh;
+            }
+
+            .company-name {
+                font-size: 36px;
+            }
+
+            .modal-content {
+                padding: 40px 30px;
+                margin: 20px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+
+            .more-info-btn {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            .time-clock {
+                top: 20px;
+                right: 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- More Info Button -->
+        <button class="more-info-btn" onclick="openModal()">More Info</button>
+
+        <!-- Time Clock -->
+        <div class="time-clock" id="timeClock">00:00:00</div>
+
+        <!-- Particle Animation Container -->
+        <div class="particle-container" id="particleContainer"></div>
+
+        <!-- Company Info -->
+        <div class="company-info">
+            <div class="company-name">Zeal 8 Co.</div>
+            <div class="company-locations">Miami, São Paulo</div>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2 class="modal-title">Zeal: Building Enduring Companies, Systematically</h2>
+                <p class="modal-text">We attract the top 1% and give them the environment to build around quality quests. Then we build alongside them. This is what I do best.</p>
+                <p class="modal-text">Company formation can be systematized—Zeal provides the conditions for that to happen.</p>
+                <p class="modal-text">We design for incentive alignment and long-term orientation.</p>
+                <p class="modal-text">We form and invest in companies—for control or meaningful ownership.</p>
+                <p class="modal-text">Our approach is hands-on: we fight entropy and apply technology to improve the core inputs of a business.</p>
+                <p class="modal-text">We search for the characteristics of enduring businesses—the laws of gravity, even in the age of AI.</p>
+                <p class="modal-text">We commit. We concentrate. We don't chase beta or venture math.</p>
+                <p class="modal-text">Every investment is made to compound over decades.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Time Clock Function
+        function updateClock() {
+            const now = new Date();
+            const easternTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+            const hours = easternTime.getHours().toString().padStart(2, '0');
+            const minutes = easternTime.getMinutes().toString().padStart(2, '0');
+            const seconds = easternTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('timeClock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('modalOverlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('modalOverlay').style.display = 'none';
+            }
+        }
+
+        // Particle Animation
+        class EmptyParticles {
+            constructor(container, count = 45000) {
+                this.container = container;
+                this.count = count;
+                this.animationRef = null;
+                this.init();
+            }
+
+            init() {
+                if (!this.container) return;
+
+                const width = this.container.clientWidth;
+                const height = this.container.clientHeight;
+
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+                
+                this.renderer = new THREE.WebGLRenderer({
+                    antialias: true,
+                    powerPreference: "high-performance",
+                    alpha: false,
+                    stencil: false,
+                    depth: true
+                });
+                
+                this.renderer.setSize(width, height);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                this.container.appendChild(this.renderer.domElement);
+
+                this.camera.position.z = 5;
+                this.scene.background = new THREE.Color('#F8F6F0');
+
+                this.createParticles();
+                this.animate();
+            }
+
+            createParticles() {
+                const particleMaterial = new THREE.ShaderMaterial({
+                    uniforms: {
+                        time: { value: 0 },
+                        opacity: { value: 0.4 }
+                    },
+                    vertexShader: `
+                        uniform float time;
+                        attribute float size;
+                        attribute vec3 customColor;
+                        varying vec3 vColor;
+
+                        void main() {
+                            vColor = customColor;
+                            vec3 pos = position;
+                            
+                            float radius = length(pos.xz);
+                            float angle = atan(pos.z, pos.x);
+                            float height = pos.y;
+                            
+                            float vessel = smoothstep(0.3, 0.7, radius) * smoothstep(1.0, 0.7, radius);
+                            
+                            angle += time * 0.25;
+                            float space = sin(time * 0.8 + radius * 3.0) * 0.1;
+                            float newRadius = (radius + space) * vessel;
+                            
+                            vec3 newPos;
+                            newPos.x = cos(angle) * newRadius;
+                            newPos.z = sin(angle) * newRadius;
+                            newPos.y = height * vessel - 1.2;
+                            newPos *= 2.75;
+                            
+                            vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+                            gl_PointSize = size * (128.0 / -mvPosition.z);
+                            gl_Position = projectionMatrix * mvPosition;
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform float opacity;
+                        varying vec3 vColor;
+
+                        void main() {
+                            vec2 center = gl_PointCoord - vec2(0.5);
+                            float dist = dot(center, center);
+                            if (dist > 0.25) discard;
+                            
+                            float alpha = (1.0 - smoothstep(0.2025, 0.25, dist)) * opacity;
+                            gl_FragColor = vec4(vColor, alpha);
+                        }
+                    `,
+                    transparent: true,
+                    depthWrite: false,
+                    blending: THREE.NormalBlending,
+                    side: THREE.DoubleSide,
+                    vertexColors: true
+                });
+
+                const positions = new Float32Array(this.count * 3);
+                const colors = new Float32Array(this.count * 3);
+                const sizes = new Float32Array(this.count);
+
+                let i3 = 0;
+                for (let i = 0; i < this.count; i++) {
+                    const t = i / this.count;
+                    const radius = Math.pow(t, 0.5);
+                    const angle = t * Math.PI * 40;
+                    const vesselHeight = Math.sin(t * Math.PI) * 1.8;
+
+                    const randRadius = radius + (Math.random() - 0.5) * 0.05;
+                    const randAngle = angle + (Math.random() - 0.5) * 0.1;
+
+                    positions[i3] = Math.cos(randAngle) * randRadius;
+                    positions[i3 + 1] = vesselHeight;
+                    positions[i3 + 2] = Math.sin(randAngle) * randRadius;
+
+                    const shade = 0.1 + Math.sqrt(radius) * 0.1 + Math.random() * 0.02;
+                    colors[i3] = shade;
+                    colors[i3 + 1] = shade;
+                    colors[i3 + 2] = shade;
+
+                    sizes[i] = (1.0 - Math.abs(vesselHeight * 0.5)) * 0.2 + 0.1;
+
+                    i3 += 3;
+                }
+
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.setAttribute('customColor', new THREE.BufferAttribute(colors, 3));
+                geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+                geometry.computeBoundingBox();
+                geometry.computeBoundingSphere();
+
+                this.points = new THREE.Points(geometry, particleMaterial);
+                this.scene.add(this.points);
+                this.particleMaterial = particleMaterial;
+            }
+
+            animate() {
+                this.animationRef = requestAnimationFrame(() => this.animate());
+
+                const time = performance.now() * 0.001;
+                this.particleMaterial.uniforms.time.value = time;
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            destroy() {
+                if (this.animationRef) {
+                    cancelAnimationFrame(this.animationRef);
+                }
+                if (this.renderer) {
+                    this.renderer.dispose();
+                }
+            }
+        }
+
+        // Initialize Particle Animation
+        const particleContainer = document.getElementById('particleContainer');
+        const particles = new EmptyParticles(particleContainer);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (particles.renderer && particles.camera) {
+                const width = particleContainer.clientWidth;
+                const height = particleContainer.clientHeight;
+                particles.camera.aspect = width / height;
+                particles.camera.updateProjectionMatrix();
+                particles.renderer.setSize(width, height);
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
