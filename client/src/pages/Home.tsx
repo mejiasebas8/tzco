@@ -27,12 +27,12 @@ export default function Home() {
         <ParticleAnimation />
       </div>
 
-      {/* Company Info - moved up to avoid overlapping with 3D animation */}
-      <div className="absolute bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 text-center z-50">
-        <div className="text-4xl md:text-5xl font-light text-[#2D2D2D] mb-2 md:mb-3 tracking-wider">
+      {/* Company Info - moved to bottom left */}
+      <div className="absolute bottom-7 md:bottom-8 left-7 md:left-8 z-50">
+        <div className="text-2xl md:text-3xl font-light text-[#2D2D2D] mb-1 md:mb-2 tracking-wider">
           Zeal 8 Co.
         </div>
-        <div className="text-sm md:text-base text-[#666666] tracking-wide">
+        <div className="text-sm text-[#666666] tracking-wide">
           Miami, São Paulo
         </div>
       </div>
