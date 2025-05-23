@@ -39,23 +39,23 @@ export default function CompanyModal({ isOpen, onClose }: CompanyModalProps) {
       }`}
     >
       <div 
-        className={`bg-[#F8F6F0] p-8 md:p-14 max-w-3xl max-h-[80vh] overflow-y-auto relative m-4 md:m-0 transition-all duration-500 ease-in-out ${
+        className={`bg-[#F8F6F0] p-5 sm:p-6 md:p-14 max-w-3xl max-h-[80vh] overflow-y-auto relative m-3 sm:m-4 md:m-0 transition-all duration-500 ease-in-out ${
           isOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`} 
         onClick={(e) => e.stopPropagation()}
       >
         <button 
           onClick={onClose}
-          className="absolute top-5 right-7 bg-none border-none text-2xl cursor-pointer text-[#2D2D2D] font-mono"
+          className="absolute top-3 sm:top-4 md:top-5 right-3 sm:right-5 md:right-7 bg-none border-none text-xl sm:text-2xl cursor-pointer text-[#2D2D2D] font-mono"
         >
           &times;
         </button>
         
-        <h2 className="text-2xl md:text-3xl font-light mb-6 md:mb-8 text-[#2D2D2D] tracking-wide font-mono">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-light mb-4 sm:mb-5 md:mb-8 text-[#2D2D2D] tracking-wide font-mono">
           Zeal: Building Enduring Companies, Systematically
         </h2>
         
-        <div className="space-y-5 text-[#2D2D2D] text-base leading-relaxed font-mono">
+        <div className="space-y-3 sm:space-y-4 md:space-y-5 text-[#2D2D2D] text-sm sm:text-base leading-relaxed font-mono">
           <p>We attract the top 1% and give them the environment to build around quality quests. Then we build alongside them. This is what I do best.</p>
           <p>Company formation can be systematized—Zeal provides the conditions for that to happen.</p>
           <p>We design for incentive alignment and long-term orientation.</p>

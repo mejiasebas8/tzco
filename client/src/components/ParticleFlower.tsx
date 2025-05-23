@@ -112,8 +112,8 @@ const ParticleFlower = () => {
       
       // Only update animation when enough time has passed (mimics setInterval at 100ms)
       if (deltaTime >= frameInterval) {
-        // Using a fixed time increment for consistent animation
-        timeRef.current += 0.0005;
+        // Using a fixed time increment for consistent animation - increased by 10% for faster spinning
+        timeRef.current += 0.00055;
         
         // Clear with slight trails for ghosting effect
         // More transparent for smoother trails at lower frame rates
