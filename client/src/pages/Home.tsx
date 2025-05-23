@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ParticleAnimation from '@/components/ParticleAnimation';
+import ParticleFlower from '@/components/ParticleFlower';
 import CompanyModal from '@/components/CompanyModal';
 import { useClock } from '@/hooks/useClock';
 
@@ -22,9 +22,9 @@ export default function Home() {
         {time}
       </div>
 
-      {/* Particle Container */}
+      {/* Particle Flower Container */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-[80vh] md:w-screen md:h-[80vh] z-10">
-        <ParticleAnimation />
+        <ParticleFlower />
       </div>
 
       {/* Company Info - moved to bottom left */}
