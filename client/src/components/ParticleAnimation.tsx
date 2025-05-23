@@ -111,11 +111,11 @@ const ParticleAnimation = () => {
           newPos.x = cos(angle) * newRadius;
           newPos.z = sin(angle) * newRadius;
           newPos.y = height * vessel - 1.2;
-          newPos *= 3.5; // Increased scale from 2.75 to 3.5 to make the entire animation larger
+          newPos *= 2.8; // Reduced by 20% from 3.5 to 2.8
           
           vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
-          // Making particles much larger than the original reference
-          gl_PointSize = size * (180.0 / -mvPosition.z); // Increased from 150 to 180
+          // Making particles proportional to the 3D object size
+          gl_PointSize = size * (150.0 / -mvPosition.z); // Reduced to maintain proportion
           gl_Position = projectionMatrix * mvPosition;
         }
       `,

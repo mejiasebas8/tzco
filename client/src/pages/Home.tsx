@@ -9,10 +9,10 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen bg-[#F8F6F0] text-[#2D2D2D] overflow-hidden">
-      {/* More Info Button */}
+      {/* More Info Button - removed border, using same font as clock */}
       <button 
         onClick={() => setIsModalOpen(true)}
-        className="absolute top-7 md:top-8 left-7 md:left-8 bg-transparent border border-[#2D2D2D] px-6 py-3 cursor-pointer text-sm md:text-base text-[#2D2D2D] transition-all duration-300 ease-in-out hover:bg-[#2D2D2D] hover:text-[#F8F6F0] z-50"
+        className="absolute top-7 md:top-8 left-7 md:left-8 bg-transparent px-6 py-3 cursor-pointer text-sm md:text-base text-[#2D2D2D] transition-all duration-300 ease-in-out hover:text-black z-50 font-mono"
       >
         More Info
       </button>
@@ -23,18 +23,23 @@ export default function Home() {
       </div>
 
       {/* Particle Container */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-[85vh] md:w-screen md:h-[85vh] z-10">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-[80vh] md:w-screen md:h-[80vh] z-10">
         <ParticleAnimation />
       </div>
 
-      {/* Company Info */}
-      <div className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 text-center z-50">
+      {/* Company Info - moved up to avoid overlapping with 3D animation */}
+      <div className="absolute bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 text-center z-50">
         <div className="text-4xl md:text-5xl font-light text-[#2D2D2D] mb-2 md:mb-3 tracking-wider">
           Zeal 8 Co.
         </div>
         <div className="text-sm md:text-base text-[#666666] tracking-wide">
           Miami, São Paulo
         </div>
+      </div>
+
+      {/* Email Address */}
+      <div className="absolute bottom-7 md:bottom-8 right-7 md:right-8 text-sm text-[#666666] font-mono z-50">
+        info@zeal8co.com
       </div>
 
       {/* Modal */}
