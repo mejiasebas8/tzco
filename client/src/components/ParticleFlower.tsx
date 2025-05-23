@@ -46,7 +46,7 @@ const ParticleFlower = () => {
       const centerY = height / 2;
       
       const PARTICLE_COUNT = 30000;
-      const formScale = 2.88; // Increased by another 20% (from 2.4 to 2.88)
+      const formScale = 2.4; // Reduced size to fit better on mobile screens
       const particles: any[] = [];
       particlesRef.current = particles;
       
@@ -101,7 +101,7 @@ const ParticleFlower = () => {
       const centerX = width / 2;
       const centerY = height / 2;
       const baseSize = Math.min(width, height);
-      const formScale = 2.88; // Same increased value as in initializeParticles
+      const formScale = 2.4; // Using same reduced value as in initializeParticles
       
       // Initialize lastFrameTime on first frame
       if (!lastFrameTime) {
