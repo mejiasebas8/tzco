@@ -11,8 +11,8 @@ styles.innerHTML = `
 
   body {
     font-family: 'Courier Prime', monospace;
-    background-color: #F8F6F0;
-    color: #2D2D2D;
+    background-color: #000000;
+    color: #F8F6F0;
     overflow: hidden;
     height: 100vh;
     margin: 0;

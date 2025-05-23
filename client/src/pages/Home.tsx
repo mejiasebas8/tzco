@@ -8,17 +8,17 @@ export default function Home() {
   const time = useClock();
 
   return (
-    <div className="relative w-screen h-screen bg-[#F8F6F0] text-[#2D2D2D] overflow-hidden">
+    <div className="relative w-screen h-screen bg-black text-[#F8F6F0] overflow-hidden">
       {/* More Info Button - removed border, using same font as clock */}
       <button 
         onClick={() => setIsModalOpen(true)}
-        className="absolute top-4 sm:top-5 md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-xs sm:text-sm md:text-base text-[#2D2D2D] transition-all duration-300 ease-in-out hover:text-black z-50 font-mono"
+        className="absolute top-4 sm:top-5 md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-xs sm:text-sm md:text-base text-[#F8F6F0] transition-all duration-300 ease-in-out hover:text-white z-50 font-mono"
       >
         More Info
       </button>
 
       {/* Time Clock */}
-      <div className="absolute top-4 sm:top-5 md:top-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm md:text-base font-bold text-[#2D2D2D] font-mono z-50">
+      <div className="absolute top-4 sm:top-5 md:top-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm md:text-base font-bold text-[#F8F6F0] font-mono z-50">
         {time}
       </div>
 
@@ -29,16 +29,16 @@ export default function Home() {
 
       {/* Company Info - moved to bottom left */}
       <div className="absolute bottom-4 sm:bottom-5 md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
-        <div className="text-lg sm:text-xl md:text-3xl font-light text-[#2D2D2D] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
+        <div className="text-lg sm:text-xl md:text-3xl font-light text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
           Zeal 8 Co.
         </div>
-        <div className="text-xs sm:text-sm text-[#666666] tracking-wide">
+        <div className="text-xs sm:text-sm text-[#999999] tracking-wide">
           Miami, São Paulo
         </div>
       </div>
 
       {/* Email Address */}
-      <div className="absolute bottom-4 sm:bottom-5 md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-[#666666] font-mono z-50">
+      <div className="absolute bottom-4 sm:bottom-5 md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-[#999999] font-mono z-50">
         info@zeal8co.com
       </div>
 

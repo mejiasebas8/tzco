@@ -117,7 +117,7 @@ const ParticleFlower = () => {
         
         // Clear with slight trails for ghosting effect
         // More transparent for smoother trails at lower frame rates
-        ctx.fillStyle = 'rgba(248, 246, 240, 0.05)'; // Updated to match our background color #F8F6F0
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Updated to match our black background
         ctx.fillRect(0, 0, width, height);
         
         particlesRef.current.forEach(particle => {
@@ -151,7 +151,7 @@ const ParticleFlower = () => {
           
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(45, 45, 45, ${opacity})`; // Updated to match our text color #2D2D2D
+          ctx.fillStyle = `rgba(248, 246, 240, ${opacity})`; // Updated to light color for dark background
           ctx.fill();
         });
         
@@ -190,7 +190,7 @@ const ParticleFlower = () => {
   }, []);
   
   return (
-    <div className="w-full h-full bg-[#F8F6F0] overflow-hidden">
+    <div className="w-full h-full bg-black overflow-hidden">
       <canvas
         ref={canvasRef}
         className="block w-full h-full"
