@@ -10,6 +10,12 @@ const ParticleFlower = () => {
   const particlesRef = useRef<any[]>([]);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const timeRef = useRef<number>(0);
+  // Add mouse position tracking
+  const mouseRef = useRef<{x: number, y: number, active: boolean}>({
+    x: 0,
+    y: 0,
+    active: false
+  });
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,6 +39,55 @@ const ParticleFlower = () => {
       // Re-initialize particles when canvas size changes
       initializeParticles();
     };
+    
+    // Mouse movement handlers
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
+      
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+        active: true
+      };
+    };
+    
+    const handleMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+    
+    const handleMouseEnter = () => {
+      mouseRef.current.active = true;
+    };
+    
+    // Add mouse event listeners
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+    canvas.addEventListener('mouseenter', handleMouseEnter);
+    
+    // Touch event handlers for mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!canvas || e.touches.length === 0) return;
+      
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+        active: true
+      };
+      
+      // Prevent scrolling while interacting with the canvas
+      e.preventDefault();
+    };
+    
+    const handleTouchEnd = () => {
+      mouseRef.current.active = false;
+    };
+    
+    // Add touch event listeners for mobile
+    canvas.addEventListener('touchmove', handleTouchMove);
+    canvas.addEventListener('touchend', handleTouchEnd);
+    canvas.addEventListener('touchcancel', handleTouchEnd);
     
     // Initialize particles on first render and window resize
     window.addEventListener('resize', updateCanvasSize);
@@ -128,6 +183,30 @@ const ParticleFlower = () => {
           const angle = Math.atan2(dy, dx);
           const height = particle.z / (formScale * 0.4); 
           
+          // Mouse interaction calculation
+          let mouseEffect = 0;
+          let mouseDistortion = 0;
+          
+          if (mouseRef.current.active) {
+            // Calculate distance from particle to mouse cursor
+            const mdx = particle.x - mouseRef.current.x;
+            const mdy = particle.y - mouseRef.current.y;
+            const mouseDist = Math.sqrt(mdx * mdx + mdy * mdy);
+            
+            // Create influence radius around cursor
+            const influenceRadius = baseSize * 0.2; // 20% of the canvas size
+            
+            if (mouseDist < influenceRadius) {
+              // Calculate normalized influence (1 at cursor, 0 at radius edge)
+              const influence = 1 - (mouseDist / influenceRadius);
+              
+              // Make particles move away from cursor with a swirl effect
+              const mouseAngle = Math.atan2(mdy, mdx);
+              mouseEffect = influence * 0.04; // Strength of push effect
+              mouseDistortion = influence * 0.3; // Strength of distortion
+            }
+          }
+          
           const flow = Math.sin(angle * 2 - timeRef.current * 0.5 + height * 2) * 0.015;
           const counterFlow = Math.cos(angle * 2 + timeRef.current * 0.5 - height * 2) * 0.015;
           
@@ -139,19 +218,72 @@ const ParticleFlower = () => {
           const containment = Math.pow(Math.min(1, dist / (formScale * 0.8)), 4);
           const pull = containment * 0.1;
           
-          // Apply gentle balanced motion
-          particle.x = particle.x + (dx * combinedFlow) - (dx * pull);
-          particle.y = particle.y + (dy * combinedFlow) - (dy * pull);
-          particle.z = particle.z + Math.sin(timeRef.current * 0.15 + dist * 2) * 0.01;
+          // Apply gentle balanced motion with mouse effect
+          if (mouseRef.current.active && mouseEffect > 0) {
+            // Calculate direction away from mouse
+            const mdx = particle.x - mouseRef.current.x;
+            const mdy = particle.y - mouseRef.current.y;
+            const mouseDist = Math.sqrt(mdx * mdx + mdy * mdy);
+            
+            if (mouseDist > 0) {
+              // Normalize direction vector
+              const pushX = mdx / mouseDist * mouseEffect;
+              const pushY = mdy / mouseDist * mouseEffect;
+              
+              // Apply swirl effect around cursor
+              const swirl = Math.PI * 0.5; // 90 degree swirl
+              const swirlX = pushX * Math.cos(swirl) - pushY * Math.sin(swirl) * mouseDistortion;
+              const swirlY = pushX * Math.sin(swirl) + pushY * Math.cos(swirl) * mouseDistortion;
+              
+              // Apply combined forces
+              particle.x += (dx * combinedFlow) - (dx * pull) + swirlX;
+              particle.y += (dy * combinedFlow) - (dy * pull) + swirlY;
+            } else {
+              particle.x += (dx * combinedFlow) - (dx * pull);
+              particle.y += (dy * combinedFlow) - (dy * pull);
+            }
+          } else {
+            particle.x += (dx * combinedFlow) - (dx * pull);
+            particle.y += (dy * combinedFlow) - (dy * pull);
+          }
           
-          // Draw particle with depth-based opacity
+          // Apply vertical oscillation with possible mouse influence
+          particle.z += Math.sin(timeRef.current * 0.15 + dist * 2) * 0.01;
+          
+          // Draw particle with depth-based opacity and cursor interaction
           const depthFactor = 1 + particle.z * 0.5;
           const opacity = 0.35 * depthFactor;
           const size = Math.max(0.001, 0.6 * depthFactor * (baseSize / 550)); // Scale size based on canvas size
           
+          // Calculate color based on mouse interaction
+          let particleColor = {r: 248, g: 246, b: 240}; // Default light color
+          
+          if (mouseRef.current.active) {
+            // Calculate distance from particle to mouse cursor
+            const mdx = particle.x - mouseRef.current.x;
+            const mdy = particle.y - mouseRef.current.y;
+            const mouseDist = Math.sqrt(mdx * mdx + mdy * mdy);
+            
+            // Create influence radius around cursor for color change
+            const colorRadius = baseSize * 0.25; // 25% of the canvas size
+            
+            if (mouseDist < colorRadius) {
+              // Calculate normalized influence (1 at cursor, 0 at radius edge)
+              const colorInfluence = 1 - (mouseDist / colorRadius);
+              
+              // Change color to a soft blue-green when influenced by cursor
+              // Mix the default color with a blue-green color based on influence
+              particleColor = {
+                r: 248 - Math.round(colorInfluence * 128), // Reduce red
+                g: 246 - Math.round(colorInfluence * 86),  // Slightly reduce green
+                b: 240 + Math.round(colorInfluence * 15)   // Increase blue
+              };
+            }
+          }
+          
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(248, 246, 240, ${opacity})`; // Updated to light color for dark background
+          ctx.fillStyle = `rgba(${particleColor.r}, ${particleColor.g}, ${particleColor.b}, ${opacity})`;
           ctx.fill();
         });
         
@@ -169,6 +301,16 @@ const ParticleFlower = () => {
     return () => {
       // Cleanup
       window.removeEventListener('resize', updateCanvasSize);
+      
+      // Remove mouse and touch event listeners
+      if (canvas) {
+        canvas.removeEventListener('mousemove', handleMouseMove);
+        canvas.removeEventListener('mouseleave', handleMouseLeave);
+        canvas.removeEventListener('mouseenter', handleMouseEnter);
+        canvas.removeEventListener('touchmove', handleTouchMove);
+        canvas.removeEventListener('touchend', handleTouchEnd);
+        canvas.removeEventListener('touchcancel', handleTouchEnd);
+      }
       
       // Cancel animation frame to prevent memory leaks
       if (animationFrameRef.current) {
