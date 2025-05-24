@@ -101,7 +101,7 @@ const ParticleFlower = () => {
       const centerY = height / 2;
       
       const PARTICLE_COUNT = 30000;
-      const formScale = 2.88; // Increased by another 20% (from 2.4 to 2.88)
+      const formScale = 3.456; // Increased by another 20% (from 2.88 to 3.456)
       const particles: any[] = [];
       particlesRef.current = particles;
       
@@ -167,8 +167,8 @@ const ParticleFlower = () => {
       
       // Only update animation when enough time has passed (mimics setInterval at 100ms)
       if (deltaTime >= frameInterval) {
-        // Using a fixed time increment for consistent animation - increased velocity significantly
-        timeRef.current += 0.0009;
+        // Using a fixed time increment for consistent animation - slowed down by 20%
+        timeRef.current += 0.00072;
         
         // Clear with slight trails for ghosting effect
         // More transparent for smoother trails at lower frame rates
