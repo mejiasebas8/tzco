@@ -1,158 +1,207 @@
 import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 const ParticleAnimation = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const particlesRef = useRef<THREE.Points | null>(null);
   const animationFrameRef = useRef<number | null>(null);
-  const particlesRef = useRef<any[]>([]);
-  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const timeRef = useRef<number>(0);
-  
+
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // Create Scene
+    const scene = new THREE.Scene();
+    sceneRef.current = scene;
     
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    ctxRef.current = ctx;
-    
-    // Set canvas size to match container size
-    const updateCanvasSize = () => {
-      if (!canvas) return;
-      const container = canvas.parentElement;
-      if (!container) return;
+    // Create Camera
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 5;
+    cameraRef.current = camera;
+
+    // Create Renderer
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      powerPreference: "high-performance",
+      alpha: false,
+      stencil: false,
+      depth: true
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.innerHTML = '';
+    container.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
+
+    // Set background color
+    scene.background = new THREE.Color('#F8F6F0');
+
+    // Create Particles
+    createParticles();
+
+    // Start animation
+    startAnimation();
+
+    // Handle window resize
+    const handleResize = () => {
+      if (!containerRef.current || !cameraRef.current || !rendererRef.current) return;
       
-      // Use clientWidth and clientHeight for responsive sizing
-      canvas.width = container.clientWidth;
-      canvas.height = container.clientHeight;
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
       
-      // Re-initialize particles when canvas size changes
-      initializeParticles();
+      cameraRef.current.aspect = width / height;
+      cameraRef.current.updateProjectionMatrix();
+      
+      rendererRef.current.setSize(width, height);
     };
-    
-    // Initialize particles on first render and window resize
-    window.addEventListener('resize', updateCanvasSize);
-    updateCanvasSize();
-    
-    function initializeParticles() {
-      if (!canvas) return;
-      const width = canvas.width;
-      const height = canvas.height;
-      const centerX = width / 2;
-      const centerY = height / 2;
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener('resize', handleResize);
       
-      // Adjust particle count for performance
-      const PARTICLE_COUNT = 8000;
-      const particles: any[] = [];
-      particlesRef.current = particles;
-      
-      const baseSize = Math.min(width, height);
-      
-      // Initialize particles
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const r = Math.random() * baseSize * 0.3;
-        
-        particles.push({
-          x: centerX + r * Math.cos(theta),
-          y: centerY + r * Math.sin(theta),
-          size: Math.random() * 2 + 1,
-          speed: Math.random() * 0.5 + 0.2,
-          angle: Math.random() * Math.PI * 2,
-          color: `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`,
-          originalX: centerX + r * Math.cos(theta),
-          originalY: centerY + r * Math.sin(theta)
-        });
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
       
-      // Reset animation time when particles are re-initialized
-      timeRef.current = 0;
-    }
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+      }
+    };
+  }, []);
+
+  const createParticles = () => {
+    if (!sceneRef.current) return;
+
+    const particleCount = 45000;
     
-    // Animation function
-    function animate() {
-      if (!canvas || !ctx) return;
-      
-      const width = canvas.width;
-      const height = canvas.height;
-      
-      // Updated time increment for animation
-      timeRef.current += 0.01;
-      
-      // Clear with slight trails for ghosting effect
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      ctx.fillRect(0, 0, width, height);
-      
-      particlesRef.current.forEach(particle => {
-        // Calculate movement with gentle waves
-        const waveFactor = Math.sin(timeRef.current + particle.angle) * 1;
-        
-        particle.x += Math.cos(particle.angle) * particle.speed + waveFactor * 0.2;
-        particle.y += Math.sin(particle.angle) * particle.speed + waveFactor * 0.1;
-        
-        // Add slight gravity toward original position
-        const dx = particle.originalX - particle.x;
-        const dy = particle.originalY - particle.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        if (dist > 50) {
-          particle.x += dx * 0.01;
-          particle.y += dy * 0.01;
+    const particleMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+        opacity: { value: 0.4 }
+      },
+      vertexShader: `
+        uniform float time;
+        attribute float size;
+        attribute vec3 customColor;
+        varying vec3 vColor;
+
+        void main() {
+          vColor = customColor;
+          vec3 pos = position;
+          
+          float radius = length(pos.xz);
+          float angle = atan(pos.z, pos.x);
+          float height = pos.y;
+          
+          float vessel = smoothstep(0.3, 0.7, radius) * smoothstep(1.0, 0.7, radius);
+          
+          angle += time * 0.25;
+          float space = sin(time * 0.8 + radius * 3.0) * 0.1;
+          float newRadius = (radius + space) * vessel;
+          
+          vec3 newPos;
+          newPos.x = cos(angle) * newRadius;
+          newPos.z = sin(angle) * newRadius;
+          newPos.y = height * vessel - 1.2;
+          newPos *= 2.8; // Reduced by 20% from 3.5 to 2.8
+          
+          vec4 mvPosition = modelViewMatrix * vec4(newPos, 1.0);
+          // Making particles proportional to the 3D object size
+          gl_PointSize = size * (150.0 / -mvPosition.z); // Reduced to maintain proportion
+          gl_Position = projectionMatrix * mvPosition;
         }
-        
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.fill();
-      });
+      `,
+      fragmentShader: `
+        uniform float opacity;
+        varying vec3 vColor;
+
+        void main() {
+          vec2 center = gl_PointCoord - vec2(0.5);
+          float dist = dot(center, center);
+          if (dist > 0.25) discard;
+          
+          float alpha = (1.0 - smoothstep(0.2025, 0.25, dist)) * opacity;
+          gl_FragColor = vec4(vColor, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.NormalBlending,
+      side: THREE.DoubleSide,
+      vertexColors: true
+    });
+
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+    const sizes = new Float32Array(particleCount);
+
+    let i3 = 0;
+    for (let i = 0; i < particleCount; i++) {
+      const t = i / particleCount;
+      const radius = Math.pow(t, 0.5);
+      const angle = t * Math.PI * 40;
+      const vesselHeight = Math.sin(t * Math.PI) * 1.8;
+
+      const randRadius = radius + (Math.random() - 0.5) * 0.05;
+      const randAngle = angle + (Math.random() - 0.5) * 0.1;
+
+      positions[i3] = Math.cos(randAngle) * randRadius;
+      positions[i3 + 1] = vesselHeight;
+      positions[i3 + 2] = Math.sin(randAngle) * randRadius;
+
+      const shade = 0.1 + Math.sqrt(radius) * 0.1 + Math.random() * 0.02;
+      colors[i3] = shade;
+      colors[i3 + 1] = shade;
+      colors[i3 + 2] = shade;
+
+      // Make particles 30% larger than the reference
+      sizes[i] = ((1.0 - Math.abs(vesselHeight * 0.5)) * 0.2 + 0.1) * 1.3;
+
+      i3 += 3;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('customColor', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    const particles = new THREE.Points(geometry, particleMaterial);
+    sceneRef.current.add(particles);
+    particlesRef.current = particles;
+  };
+
+  const startAnimation = () => {
+    const clock = new THREE.Clock();
+    
+    const animate = () => {
+      if (!sceneRef.current || !cameraRef.current || !rendererRef.current || !particlesRef.current) return;
+      
+      const elapsedTime = clock.getElapsedTime();
+      
+      // Update particle animation
+      if (particlesRef.current.material instanceof THREE.ShaderMaterial) {
+        particlesRef.current.material.uniforms.time.value = elapsedTime;
+      }
+      
+      // Render
+      rendererRef.current.render(sceneRef.current, cameraRef.current);
       
       // Continue animation loop
       animationFrameRef.current = requestAnimationFrame(animate);
-    }
-    
-    // Start animation
-    animationFrameRef.current = requestAnimationFrame(animate);
-    
-    // Click to restart animation
-    const handleClick = () => {
-      initializeParticles();
     };
     
-    canvas.addEventListener('click', handleClick);
-    
-    return () => {
-      // Cleanup
-      window.removeEventListener('resize', updateCanvasSize);
-      canvas.removeEventListener('click', handleClick);
-      
-      // Cancel animation frame to prevent memory leaks
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-        animationFrameRef.current = null;
-      }
-      
-      if (ctxRef.current && canvasRef.current) {
-        ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      }
-      
-      if (particlesRef.current) {
-        particlesRef.current.length = 0;
-      }
-      
-      timeRef.current = 0;
-      ctxRef.current = null;
-    };
-  }, []);
-  
-  return (
-    <div className="w-full h-full bg-black overflow-hidden">
-      <canvas
-        ref={canvasRef}
-        className="block w-full h-full"
-      />
-    </div>
-  );
+    animate();
+  };
+
+  return <div ref={containerRef} className="w-full h-full"></div>;
 };
 
 export default ParticleAnimation;
