@@ -9,16 +9,16 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen bg-black text-[#F8F6F0] overflow-hidden">
-      {/* More Info Link - moved down for better mobile visibility */}
+      {/* More Info Link - adjusted for perfect visibility */}
       <a 
         href="/more-info"
-        className="absolute top-[12vh] sm:top-[10vh] md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-sm sm:text-sm md:text-base text-[#F8F6F0] transition-all duration-300 ease-in-out hover:text-white z-50 font-mono"
+        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-sm sm:text-sm md:text-base text-[#F8F6F0] transition-all duration-300 ease-in-out hover:text-white z-50 font-mono"
       >
         More Info
       </a>
 
-      {/* Time Clock - moved down for better mobile visibility */}
-      <div className="absolute top-[12vh] sm:top-[10vh] md:top-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm md:text-base text-[#F8F6F0] font-mono z-50">
+      {/* Time Clock - aligned perfectly with More Info link */}
+      <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm md:text-base text-[#F8F6F0] font-mono z-50">
         {time}
       </div>
 
@@ -27,8 +27,8 @@ export default function Home() {
         <ParticleFlower />
       </div>
 
-      {/* Company Info - moved up for better mobile visibility */}
-      <div className="absolute bottom-[15vh] sm:bottom-[12vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
+      {/* Company Info - adjusted for perfect visibility */}
+      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
         <div className="text-lg sm:text-xl md:text-3xl font-light text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
           Zeal8 Co.
         </div>
@@ -37,8 +37,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Email Address - moved up for better mobile visibility */}
-      <div className="absolute bottom-[15vh] sm:bottom-[12vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm text-[#999999] font-mono z-50">
+      {/* Email Address - aligned perfectly with company info */}
+      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm text-[#999999] font-mono z-50">
         info@zeal8co.com
       </div>
 

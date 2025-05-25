@@ -12,8 +12,8 @@ const MoreInfo = () => {
         </div>
       </div>
 
-      {/* Navigation - moved down for better mobile visibility */}
-      <div className="absolute top-[12vh] sm:top-[10vh] md:top-6 left-4 sm:left-5 md:left-6 z-10">
+      {/* Navigation - adjusted for perfect visibility */}
+      <div className="absolute top-[4vh] sm:top-[5vh] md:top-6 left-4 sm:left-5 md:left-6 z-10">
         <Link href="/">
           <span className="text-white font-mono hover:text-gray-400 transition-colors cursor-pointer text-sm sm:text-sm md:text-base">
             ← Back to Home
@@ -21,8 +21,8 @@ const MoreInfo = () => {
         </Link>
       </div>
 
-      {/* Corner Text - moved up for better mobile visibility */}
-      <div className="absolute bottom-[15vh] sm:bottom-[12vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
+      {/* Corner Text - adjusted for perfect visibility */}
+      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
         <h2 className="text-xl mb-3 font-mono">Zeal8 Co.</h2>
         <p className="text-sm font-mono mb-3 leading-snug">
           What are the characteristics of enduring businesses? How can the
