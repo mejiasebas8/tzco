@@ -181,18 +181,21 @@ const ParticleFlower = () => {
 
   return (
     <div style={{ 
-      width: '660px', 
-      height: '660px', 
+      width: '100%',
+      height: '100%',
+      maxWidth: '660px', 
+      maxHeight: '660px', 
       margin: 'auto', 
       backgroundColor: '#0A0A0A', 
-      overflow: 'hidden' 
+      overflow: 'hidden',
+      aspectRatio: '1 / 1'
     }}>
       <canvas 
         ref={canvasRef} 
         style={{ 
           display: 'block', 
-          width: '660px', 
-          height: '660px' 
+          width: '100%', 
+          height: '100%' 
         }} 
       />
     </div>
