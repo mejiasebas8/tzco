@@ -30,7 +30,7 @@ export default function Home() {
       {/* Company Info - moved to bottom left */}
       <div className="absolute bottom-4 sm:bottom-5 md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
         <div className="text-lg sm:text-xl md:text-3xl font-light text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
-          Zeal 8 Co.
+          Zeal8 Co.
         </div>
         <div className="text-xs sm:text-sm text-[#999999] tracking-wide">
           Miami, São Paulo
