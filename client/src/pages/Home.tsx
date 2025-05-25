@@ -18,7 +18,7 @@ export default function Home() {
       </a>
 
       {/* Time Clock */}
-      <div className="absolute top-4 sm:top-5 md:top-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm md:text-base font-bold text-[#F8F6F0] font-mono z-50">
+      <div className="absolute top-4 sm:top-5 md:top-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm md:text-base text-[#F8F6F0] font-mono z-50">
         {time}
       </div>
 
