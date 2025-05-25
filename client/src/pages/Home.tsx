@@ -27,8 +27,8 @@ export default function Home() {
         <ParticleFlower />
       </div>
 
-      {/* Company Info - adjusted for perfect visibility */}
-      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
+      {/* Company Info - moved up for better visibility */}
+      <div className="absolute bottom-[17vh] sm:bottom-[17vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
         <div className="text-lg sm:text-xl md:text-3xl font-light text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
           Zeal8 Co.
         </div>
@@ -38,7 +38,7 @@ export default function Home() {
       </div>
 
       {/* Email Address - aligned perfectly with company info */}
-      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm text-[#999999] font-mono z-50">
+      <div className="absolute bottom-[17vh] sm:bottom-[17vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm text-[#999999] font-mono z-50">
         info@zeal8co.com
       </div>
 

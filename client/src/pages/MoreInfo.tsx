@@ -21,8 +21,8 @@ const MoreInfo = () => {
         </Link>
       </div>
 
-      {/* Corner Text - adjusted for perfect visibility */}
-      <div className="absolute bottom-[7vh] sm:bottom-[8vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
+      {/* Corner Text - moved up for better visibility */}
+      <div className="absolute bottom-[17vh] sm:bottom-[17vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
         <h2 className="text-xl mb-3 font-mono">Zeal8 Co.</h2>
         <p className="text-sm font-mono mb-3 leading-snug">
           What are the characteristics of enduring businesses? How can the
