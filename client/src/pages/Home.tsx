@@ -9,13 +9,13 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen bg-black text-[#F8F6F0] overflow-hidden">
-      {/* More Info Button - removed border, using same font as clock */}
-      <button 
-        onClick={() => setIsModalOpen(true)}
+      {/* More Info Link */}
+      <a 
+        href="/more-info"
         className="absolute top-4 sm:top-5 md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-xs sm:text-sm md:text-base text-[#F8F6F0] transition-all duration-300 ease-in-out hover:text-white z-50 font-mono"
       >
         More Info
-      </button>
+      </a>
 
       {/* Time Clock */}
       <div className="absolute top-4 sm:top-5 md:top-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm md:text-base font-bold text-[#F8F6F0] font-mono z-50">

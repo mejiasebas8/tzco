@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'wouter';
+import ParticleFlower from '@/components/ParticleFlower';
 
 const MoreInfo = () => {
   return (
     <div className="relative w-full h-screen bg-black text-white overflow-hidden">
       {/* Central Image/Animation Container */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[660px] h-[660px] bg-[#0A0A0A]">
-          {/* This is where we'll add the animation or image */}
-        </div>
+        <ParticleFlower />
       </div>
       
       {/* Navigation */}
@@ -24,17 +23,12 @@ const MoreInfo = () => {
       <div className="absolute bottom-8 left-8 z-10 max-w-sm">
         <h2 className="text-xl mb-4 font-mono">About Zeal 8 Co</h2>
         <p className="text-sm font-mono mb-3">
-          Zeal 8 Co is a creative technology studio focusing on innovative digital 
-          experiences and interactive art installations.
-        </p>
-        <p className="text-sm font-mono mb-3">
-          Founded in 2022, we operate at the intersection of art, design, and 
-          emerging technologies, creating experiences that challenge perception 
-          and inspire wonder.
+          Company formation can be systematized through the right conditions and environment. 
+          Quality businesses can be improved through disciplined excellence and technology.
         </p>
         <p className="text-sm font-mono">
-          Our team of artists, developers, and designers collaborate on projects 
-          ranging from interactive web experiences to physical installations.
+          Zeal works with exceptional talent providing them the optimal ecosystem, capital 
+          and hands-on building experiencie to build quality quests and enduring companies.
         </p>
       </div>
     </div>

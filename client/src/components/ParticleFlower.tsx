@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
 const ParticleFlower = () => {
-  const canvasRef = useRef(null);
-  const animationFrameRef = useRef(null);
-  const particlesRef = useRef([]);
-  const ctxRef = useRef(null);
-  const timeRef = useRef(0);
-  const mouseRef = useRef({ x: 0, y: 0, isHovering: false });
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const particlesRef = useRef<any[]>([]);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const timeRef = useRef<number>(0);
+  const mouseRef = useRef<{ x: number; y: number; isHovering: boolean }>({ x: 0, y: 0, isHovering: false });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,7 +16,7 @@ const ParticleFlower = () => {
     ctxRef.current = ctx;
 
     // Mouse interaction handlers
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current.x = e.clientX - rect.left;
       mouseRef.current.y = e.clientY - rect.top;
