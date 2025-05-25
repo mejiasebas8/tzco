@@ -13,22 +13,21 @@ const MoreInfo = () => {
       {/* Navigation */}
       <div className="absolute top-6 left-6 z-10">
         <Link href="/">
-          <a className="text-white font-mono hover:text-gray-400 transition-colors">
+          <span className="text-white font-mono hover:text-gray-400 transition-colors cursor-pointer">
             ← Back to Home
-          </a>
+          </span>
         </Link>
       </div>
       
       {/* Corner Text */}
       <div className="absolute bottom-8 left-8 z-10 max-w-sm">
-        <h2 className="text-xl mb-4 font-mono">About Zeal 8 Co</h2>
+        <h2 className="text-xl mb-4 font-mono">Zeal8 Co.</h2>
         <p className="text-sm font-mono mb-3">
-          Company formation can be systematized through the right conditions and environment. 
-          Quality businesses can be improved through disciplined excellence and technology.
+          What are the characteristics of enduring businesses? How can the genetics of a company be edited from the beggining? 
+          How can we build for very long periods of time? How can technology be applied to quality businesses? Who are formidable builders?
         </p>
         <p className="text-sm font-mono">
-          Zeal works with exceptional talent providing them the optimal ecosystem, capital 
-          and hands-on building experiencie to build quality quests and enduring companies.
+          These are the questions that matter to us. Zeal8 Co. provides capital and an operational hands-on approach to build and own businesses that answer these questions.
         </p>
       </div>
     </div>
