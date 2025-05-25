@@ -24,14 +24,13 @@ const MoreInfo = () => {
         <h2 className="text-xl mb-4 font-mono">Zeal8 Co.</h2>
         <p className="text-sm font-mono mb-3">
           What are the characteristics of enduring businesses? How can the
-          genetics of a company be edited from the beggining? How can we build
-          for very long periods of time? How can technology be applied to
-          quality businesses? Who are formidable builders?
+          genetics of a company be best designed from inception? How can we build
+          for generational timescales? How can technology be applied to
+          exceptional businesses? Who are the formidable builders worth backing? These are the questions that drive us.
         </p>
         <p className="text-sm font-mono">
-          These are the questions that matter to us. Zeal8 Co. provides capital
-          and an operational hands-on approach to build and own businesses that
-          answer these questions.
+          Zeal8 Co. provides capital, technology, and a hands-on operational approach to build 
+          and own businesses for the long term.
         </p>
       </div>
     </div>
