@@ -14,7 +14,7 @@ export function useClock(): string {
       const minutes = easternTime.getMinutes().toString().padStart(2, '0');
       const seconds = easternTime.getSeconds().toString().padStart(2, '0');
       
-      setTime(`${hours}:${minutes}:${seconds}`);
+      setTime(`${hours}:${minutes}:${seconds} ET`);
     }
 
     // Call once immediately
