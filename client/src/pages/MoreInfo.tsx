@@ -23,7 +23,7 @@ const MoreInfo = () => {
 
       {/* Corner Text - moved up for better visibility */}
       <div className="absolute bottom-[17vh] sm:bottom-[17vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
-        <h2 className="text-xl mb-3 font-mono">Zeal8 Co.</h2>
+        <h2 className="text-xl mb-3 font-mono">Zeal8</h2>
         <p className="text-sm font-mono mb-3 leading-snug">
           What are the characteristics of enduring businesses? How can the
           genetics of a company be best designed from inception? How can we build
@@ -31,7 +31,7 @@ const MoreInfo = () => {
           exceptional businesses? Who are the formidable builders worth backing? These are the questions that drive us.
         </p>
         <p className="text-sm font-mono leading-snug">
-          Zeal8 Co. provides capital, technology, and a hands-on operational approach to build 
+          Zeal8 provides capital, technology, and a hands-on operational approach to build 
           and own businesses for the long term.
         </p>
       </div>
