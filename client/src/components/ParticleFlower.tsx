@@ -80,7 +80,7 @@ const ParticleFlower = () => {
 
       if (deltaTime >= frameInterval) {
         // Faster time progression (increased from 0.0005 to 0.0008)
-        timeRef.current += 0.0008;
+        timeRef.current += 0.00068;
 
         ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
         ctx.fillRect(0, 0, width, height);
@@ -114,8 +114,8 @@ const ParticleFlower = () => {
           }
 
           // Faster flow speeds (increased multipliers) with mouse influence
-          const flow = Math.sin(angle * 2 - timeRef.current * 0.8 + height * 2) * (0.018 + mouseInfluence);
-          const counterFlow = Math.cos(angle * 2 + timeRef.current * 0.8 - height * 2) * (0.018 + mouseInfluence);
+          const flow = Math.sin(angle * 2 - timeRef.current * 0.68 + height * 2) * (0.0153 + mouseInfluence);
+          const counterFlow = Math.cos(angle * 2 + timeRef.current * 0.68 - height * 2) * (0.0153 + mouseInfluence);
           const blend = (Math.sin(height * Math.PI) + 1) * 0.5;
           const combinedFlow = flow * blend + counterFlow * (1 - blend);
 
@@ -126,7 +126,7 @@ const ParticleFlower = () => {
           particle.y = particle.y + (dy * combinedFlow) - (dy * pull);
           
           // Faster z-axis movement with mouse influence
-          particle.z = particle.z + Math.sin(timeRef.current * 0.24 + dist * 2) * 0.015;
+          particle.z = particle.z + Math.sin(timeRef.current * 0.204 + dist * 2) * 0.01275;
 
           const depthFactor = 1 + particle.z * 0.5;
           const opacity = (0.15 + colorShift * 0.4) * depthFactor;
