@@ -13,7 +13,7 @@ const MoreInfo = () => {
       </div>
 
       {/* Navigation - adjusted for perfect visibility */}
-      <div className="absolute top-[4vh] sm:top-[5vh] md:top-6 left-4 sm:left-5 md:left-6 z-10">
+      <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 z-10">
         <Link href="/">
           <span className="text-white font-mono hover:text-gray-400 transition-colors cursor-pointer text-sm sm:text-sm md:text-base">
             ← Back to Home

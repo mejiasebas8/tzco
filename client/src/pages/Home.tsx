@@ -29,10 +29,10 @@ export default function Home() {
 
       {/* Company Info - moved up for better visibility */}
       <div className="absolute bottom-[17vh] sm:bottom-[17vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
-        <div className="text-lg sm:text-xl md:text-3xl font-light text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2 tracking-wider">
+        <div className="text-lg sm:text-xl md:text-3xl font-mono text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2">
           Zeal8
         </div>
-        <div className="text-sm sm:text-sm text-[#999999] tracking-wide">
+        <div className="text-sm sm:text-sm text-[#999999] font-mono">
           Miami, São Paulo
         </div>
       </div>
