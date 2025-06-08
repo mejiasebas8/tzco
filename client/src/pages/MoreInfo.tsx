@@ -25,14 +25,10 @@ const MoreInfo = () => {
       <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-10 max-w-sm">
         <h2 className="text-xl mb-3 font-mono">Zeal8</h2>
         <p className="text-sm font-mono mb-3 leading-snug">
-          What are the characteristics of enduring businesses? How can the
-          genetics of a company be best designed from inception? How can we build
-          for generational timescales? How can technology be applied to
-          exceptional businesses? Who are the formidable builders worth backing? These are the questions that drive us.
+          What are the characteristics of enduring businesses? How can the genetics of a company be best designed from inception? How can we build or hold companies for generational timescales? How can technology be applied to create exceptional, lasting enterprises? Who are the formidable builders worth backing? These are the questions that drive us.
         </p>
         <p className="text-sm font-mono leading-snug">
-          Zeal8 provides capital, technology, and a hands-on operational approach to build 
-          and own businesses for the long term.
+          Zeal8 provides capital, technology, and a hands-on operational approach to build, acquire, and hold businesses for the long term. We focus on creating and owning companies designed to thrive across decades, whether developed from the ground up or strategically acquired.
         </p>
       </div>
     </div>
