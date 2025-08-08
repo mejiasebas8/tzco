@@ -5,9 +5,9 @@ import ParticleFlower from "@/components/ParticleFlower";
 const MoreInfo = () => {
   return (
     <div className="relative w-full h-screen bg-[#EDE7DC] text-black overflow-hidden">
-      {/* Particle Animation Container - positioned above text */}
-      <div className="absolute top-[12vh] sm:top-[15vh] md:top-[20vh] left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-        <div className="w-[70vw] h-[70vw] max-w-[50vh] max-h-[50vh] sm:w-[60vw] sm:h-[60vw] sm:max-w-[45vh] sm:max-h-[45vh]">
+      {/* Central Image/Animation Container */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-[90vw] h-[90vw] max-w-[80vh] max-h-[80vh]">
           <ParticleFlower />
         </div>
       </div>
