@@ -5,9 +5,9 @@ import ParticleFlower from "@/components/ParticleFlower";
 const MoreInfo = () => {
   return (
     <div className="relative w-full h-screen bg-[#EDE7DC] text-black overflow-hidden">
-      {/* Central Image/Animation Container */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[90vw] h-[90vw] max-w-[80vh] max-h-[80vh]">
+      {/* Central Image/Animation Container - positioned for desktop and mobile */}
+      <div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-16">
+        <div className="w-[70vw] h-[70vw] max-w-[50vh] max-h-[50vh] md:w-[60vw] md:h-[60vw] md:max-w-[70vh] md:max-h-[70vh] md:translate-y-[-10vh]">
           <ParticleFlower />
         </div>
       </div>
@@ -22,7 +22,7 @@ const MoreInfo = () => {
       </div>
 
       {/* Corner Text - aligned with upper corner height and mobile optimized */}
-      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 right-4 sm:right-5 md:right-8 z-10 max-w-none sm:max-w-sm md:max-w-md">
+      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 right-4 sm:right-5 md:right-8 z-20 max-w-none sm:max-w-sm md:max-w-md">
         <h2 className="text-base sm:text-lg md:text-xl mb-2 sm:mb-3 font-mono text-black">Zeal8</h2>
         <div className="space-y-2 sm:space-y-3">
           <p className="text-xs sm:text-xs md:text-sm font-mono leading-relaxed text-black">
