@@ -82,7 +82,7 @@ const ParticleFlower = () => {
         // Faster time progression (increased from 0.0005 to 0.0008)
         timeRef.current += 0.00068;
 
-        ctx.fillStyle = 'rgba(10, 10, 10, 0.08)';
+        ctx.fillStyle = 'rgba(237, 231, 220, 0.08)';
         ctx.fillRect(0, 0, width, height);
 
         particles.forEach(particle => {
@@ -135,10 +135,10 @@ const ParticleFlower = () => {
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
           
-          // Color shifts from light gray to bright white when near cursor
-          const red = Math.floor(180 + colorShift * 75);
-          const green = Math.floor(180 + colorShift * 75);
-          const blue = Math.floor(180 + colorShift * 75);
+          // Color shifts from dark gray to bright black when near cursor
+          const red = Math.floor(80 - colorShift * 40);
+          const green = Math.floor(80 - colorShift * 40);
+          const blue = Math.floor(80 - colorShift * 40);
           
           ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
           ctx.fill();
@@ -186,7 +186,7 @@ const ParticleFlower = () => {
       maxWidth: '660px', 
       maxHeight: '660px', 
       margin: 'auto', 
-      backgroundColor: '#0A0A0A', 
+      backgroundColor: '#EDE7DC', 
       overflow: 'hidden',
       aspectRatio: '1 / 1'
     }}>

@@ -8,17 +8,17 @@ export default function Home() {
   const time = useClock();
 
   return (
-    <div className="relative w-screen h-screen bg-black text-[#F8F6F0] overflow-hidden">
+    <div className="relative w-screen h-screen bg-[#EDE7DC] text-black overflow-hidden">
       {/* More Info Link - adjusted for perfect visibility */}
       <a 
         href="/more-info"
-        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-sm sm:text-sm md:text-base text-[#F8F6F0] transition-all duration-300 ease-in-out hover:text-white z-50 font-mono"
+        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-sm sm:text-sm md:text-base text-black transition-all duration-300 ease-in-out hover:text-gray-800 z-50 font-mono"
       >
         More Info
       </a>
 
       {/* Time Clock - aligned perfectly with More Info link */}
-      <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm md:text-base text-[#F8F6F0] font-mono z-50">
+      <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm md:text-base text-black font-mono z-50">
         {time}
       </div>
 
@@ -29,16 +29,16 @@ export default function Home() {
 
       {/* Company Info - aligned with upper corner height */}
       <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
-        <div className="text-lg sm:text-xl md:text-3xl font-mono text-[#F8F6F0] mb-0.5 sm:mb-1 md:mb-2">
+        <div className="text-base sm:text-lg md:text-3xl font-mono text-black mb-0.5 sm:mb-1 md:mb-2">
           Zeal8
         </div>
-        <div className="text-sm sm:text-sm text-[#999999] font-mono">
+        <div className="text-xs sm:text-sm text-gray-600 font-mono">
           Miami, São Paulo
         </div>
       </div>
 
       {/* Email Address - aligned with upper corner height */}
-      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm text-[#999999] font-mono z-50">
+      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-gray-600 font-mono z-50">
         info@zeal8co.com
       </div>
 
