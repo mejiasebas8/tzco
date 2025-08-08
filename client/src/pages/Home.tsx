@@ -23,12 +23,12 @@ export default function Home() {
       </div>
 
       {/* Particle Flower Container - centered with responsive sizing */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[80vh] max-h-[80vh] flex items-center justify-center z-10">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] sm:w-[90vw] sm:h-[90vw] max-w-[70vh] max-h-[70vh] sm:max-w-[80vh] sm:max-h-[80vh] flex items-center justify-center z-10">
         <ParticleFlower />
       </div>
 
       {/* Company Info - aligned with upper corner height */}
-      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
+      <div className="absolute bottom-[8vh] sm:bottom-[10vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
         <div className="text-base sm:text-lg md:text-3xl font-mono text-black mb-0.5 sm:mb-1 md:mb-2">
           Zeal8
         </div>
@@ -38,7 +38,7 @@ export default function Home() {
       </div>
 
       {/* Email Address - aligned with upper corner height */}
-      <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-gray-600 font-mono z-50">
+      <div className="absolute bottom-[8vh] sm:bottom-[10vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-gray-600 font-mono z-50">
         info@zeal8co.com
       </div>
 
