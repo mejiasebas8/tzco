@@ -1,8 +1,8 @@
-# Zeal8 - Particle Animation Portfolio
+# The Zeal Company - Particle Animation Portfolio
 
 ## Overview
 
-A modern portfolio website for Zeal8 featuring an interactive particle animation powered by React and Three.js. The application showcases a beautiful flowering particle system as the central visual element, with clean typography and minimal navigation. Built as a full-stack application with Express backend and React frontend, the project demonstrates advanced animation techniques and responsive design principles.
+A modern portfolio website for The Zeal Company featuring an interactive particle animation powered by React and Three.js. The application showcases a beautiful flowering particle system as the central visual element, with clean typography and minimal navigation. Built as a full-stack application with Express backend and React frontend, the project demonstrates advanced animation techniques and responsive design principles.
 
 ## User Preferences
 
