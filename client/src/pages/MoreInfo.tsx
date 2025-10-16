@@ -23,7 +23,6 @@ const MoreInfo = () => {
 
       {/* Corner Text - aligned with upper corner height and mobile optimized */}
       <div className="absolute bottom-[4vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 right-4 sm:right-5 md:right-8 z-20 max-w-none sm:max-w-sm md:max-w-md">
-        <h2 className="text-base sm:text-lg md:text-xl mb-2 sm:mb-3 font-mono text-black">The Zeal Company</h2>
         <div className="space-y-2 sm:space-y-3">
           <p className="text-xs sm:text-xs md:text-sm font-mono leading-relaxed text-black">
             The Zeal Company provides capital, technology and a hands on operational approach to build and own businesses for the long term.
