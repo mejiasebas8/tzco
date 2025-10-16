@@ -29,7 +29,7 @@ export default function Home() {
 
       {/* Company Info - aligned with upper corner height */}
       <div className="absolute bottom-[8vh] sm:bottom-[10vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50">
-        <div className="text-base sm:text-lg md:text-3xl font-mono text-black mb-0.5 sm:mb-1 md:mb-2">
+        <div className="text-sm sm:text-sm md:text-base font-mono font-bold text-black mb-0.5 sm:mb-1 md:mb-2">
           The Zeal Company
         </div>
         <div className="text-xs sm:text-sm text-gray-600 font-mono">
