@@ -33,7 +33,7 @@ export default function Home() {
           The Zeal Company
         </div>
         <div className="text-xs sm:text-sm text-gray-600 font-mono">
-          Miami
+          Miami, USA
         </div>
       </div>
 
