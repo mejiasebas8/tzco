@@ -1,0 +1,106 @@
+import React, { useRef, useEffect } from 'react';
+
+const ContinuousLineDrawing = () => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    let currentTime = 0;
+    let currentPosition = { x: centerX, y: centerY };
+    let currentAngle = 0;
+    let radius = 0;
+    let points = [{ x: centerX, y: centerY, timestamp: 0 }];
+
+    const clearCanvas = () => {
+      ctx.fillStyle = '#F0EEE6';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
+    const drawDot = (x, y) => {
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(80, 80, 80, 1)';
+      ctx.fill();
+    };
+
+    const animate = () => {
+      currentTime += 0.00375;
+      clearCanvas();
+      radius += 0.0375;
+      currentAngle += 0.025;
+
+      const newX = centerX + Math.cos(currentAngle) * radius;
+      const newY = centerY + Math.sin(currentAngle) * radius;
+
+      currentPosition.x = newX;
+      currentPosition.y = newY;
+
+      points.push({
+        x: currentPosition.x,
+        y: currentPosition.y,
+        timestamp: currentTime
+      });
+
+      if (radius > 260) {
+        radius = 0;
+        points = [{ x: centerX, y: centerY, timestamp: currentTime }];
+        currentPosition = { x: centerX, y: centerY };
+        currentAngle = 0;
+      }
+
+      for (let i = 1; i < points.length; i++) {
+        const p1 = points[i - 1];
+        const p2 = points[i];
+        const age = Math.min((currentTime - p1.timestamp) / 10, 1);
+        const startGray = 170;
+        const endGray = 85;
+        const intensity = Math.floor(startGray + (endGray - startGray) * age);
+        const startAlpha = 0.3;
+        const endAlpha = 1.0;
+        const alpha = startAlpha + (endAlpha - startAlpha) * age;
+
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = `rgba(${intensity}, ${intensity}, ${intensity}, ${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      drawDot(currentPosition.x, currentPosition.y);
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    clearCanvas();
+    animate();
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      points.length = 0;
+    };
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center bg-[#F0EEE6] p-4 w-full h-full">
+      <div className="w-[550px] h-[550px] border border-gray-200 shadow-md">
+        <canvas
+          ref={canvasRef}
+          width={550}
+          height={550}
+          className="bg-[#F0EEE6]"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ContinuousLineDrawing;

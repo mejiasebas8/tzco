@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
-import ParticleFlower from "@/components/ParticleFlower";
+import ContinuousLineDrawing from "@/components/ContinuousLineDrawing";
 
 const MoreInfo = () => {
   return (
@@ -8,7 +8,7 @@ const MoreInfo = () => {
       {/* Central Image/Animation Container - positioned for desktop and mobile */}
       <div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-16">
         <div className="w-[45vw] h-[45vw] max-w-[30vh] max-h-[30vh] translate-y-[-32vh] md:w-[60vw] md:h-[60vw] md:max-w-[70vh] md:max-h-[70vh] md:translate-y-[-10vh]">
-          <ParticleFlower />
+          <ContinuousLineDrawing />
         </div>
       </div>
 
