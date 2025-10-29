@@ -82,7 +82,7 @@ const ParticleFlower = () => {
         // Faster time progression (increased from 0.0005 to 0.0008)
         timeRef.current += 0.00068;
 
-        ctx.fillStyle = 'rgba(237, 231, 220, 0.08)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
         ctx.fillRect(0, 0, width, height);
 
         particles.forEach(particle => {
@@ -186,7 +186,7 @@ const ParticleFlower = () => {
       maxWidth: '660px', 
       maxHeight: '660px', 
       margin: 'auto', 
-      backgroundColor: '#EDE7DC', 
+      backgroundColor: '#FFFFFF', 
       overflow: 'hidden',
       aspectRatio: '1 / 1'
     }}>
