@@ -30,7 +30,7 @@ const ContinuousLineDrawing = () => {
     const points: Array<{ x: number; y: number; timestamp: number }> = [];
 
     const clearCanvas = () => {
-      ctx.fillStyle = '#EDE7DC';
+      ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     

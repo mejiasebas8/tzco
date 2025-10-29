@@ -8,7 +8,7 @@ export default function Home() {
   const time = useClock();
 
   return (
-    <div className="relative w-screen h-screen bg-[#EDE7DC] text-black overflow-hidden">
+    <div className="relative w-screen h-screen bg-white text-black overflow-hidden">
       {/* More Info Link - adjusted for perfect visibility */}
       <a 
         href="/more-info"
