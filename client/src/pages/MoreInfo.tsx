@@ -1,17 +1,9 @@
 import React from "react";
 import { Link } from "wouter";
-import ContinuousLineDrawing from "@/components/ContinuousLineDrawing";
 
 const MoreInfo = () => {
   return (
     <div className="relative w-full h-screen bg-white text-black overflow-hidden">
-      {/* Central Image/Animation Container - positioned for desktop and mobile */}
-      <div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-16">
-        <div className="w-[45vw] h-[45vw] max-w-[30vh] max-h-[30vh] translate-y-[-32vh] md:w-[60vw] md:h-[60vw] md:max-w-[70vh] md:max-h-[70vh] md:translate-y-[-10vh]">
-          <ContinuousLineDrawing />
-        </div>
-      </div>
-
       {/* Navigation - adjusted for perfect visibility */}
       <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 z-10">
         <Link href="/">
