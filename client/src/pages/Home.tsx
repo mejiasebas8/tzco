@@ -23,7 +23,7 @@ export default function Home() {
       </div>
 
       {/* Particle Flower Container - centered with responsive sizing */}
-      <div className="absolute top-[35%] md:top-1/2 left-1/2 transform -translate-x-1/2 md:-translate-y-1/2 w-[96vw] h-[96vw] sm:w-[100vw] sm:h-[100vw] md:w-[90vw] md:h-[90vw] max-w-[84vh] max-h-[84vh] sm:max-w-[96vh] sm:max-h-[96vh] md:max-w-[80vh] md:max-h-[80vh] flex items-center justify-center z-10">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96vw] h-[96vw] sm:w-[100vw] sm:h-[100vw] md:w-[90vw] md:h-[90vw] max-w-[84vh] max-h-[84vh] sm:max-w-[96vh] sm:max-h-[96vh] md:max-w-[80vh] md:max-h-[80vh] flex items-center justify-center z-10">
         <ParticleFlower />
       </div>
 
