@@ -14,8 +14,8 @@ const ParticleFlower = () => {
     const ctx = canvas.getContext('2d');
     ctxRef.current = ctx;
 
-    const width = canvas.width = 605;
-    const height = canvas.height = 605;
+    const width = canvas.width = 550;
+    const height = canvas.height = 550;
     const centerX = width / 2;
     const centerY = height / 2;
 
@@ -61,10 +61,10 @@ const ParticleFlower = () => {
       const deltaTime = currentTime - lastFrameTime;
 
       if (deltaTime >= frameInterval) {
-        timeRef.current += 0.000475;
+        timeRef.current += 0.0005;
 
         if (ctx) {
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.fillStyle = 'rgba(240, 238, 230, 0.05)';
           ctx.fillRect(0, 0, width, height);
         }
       
@@ -133,8 +133,8 @@ const ParticleFlower = () => {
     <div style={{ 
       width: '100%',
       height: '100%',
-      maxWidth: '605px', 
-      maxHeight: '605px', 
+      maxWidth: '550px', 
+      maxHeight: '550px', 
       margin: 'auto', 
       backgroundColor: '#FFFFFF', 
       overflow: 'hidden',

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ParticleFlower from '@/components/ParticleFlower';
+import RandomParticle from '@/components/RandomParticle';
 import CompanyModal from '@/components/CompanyModal';
 import { useClock } from '@/hooks/useClock';
 
@@ -22,9 +22,9 @@ export default function Home() {
         {time}
       </div>
 
-      {/* Particle Flower Container - centered with responsive sizing */}
+      {/* Particle Container - centered with responsive sizing */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[96vw] h-[110vw] sm:w-[100vw] sm:h-[115vw] md:w-[90vw] md:h-[90vw] max-w-[84vh] max-h-[97vh] sm:max-w-[96vh] sm:max-h-[110vh] md:max-w-[80vh] md:max-h-[80vh] flex items-center justify-center z-10">
-        <ParticleFlower />
+        <RandomParticle />
       </div>
 
       {/* Company Info - aligned with upper corner height */}
