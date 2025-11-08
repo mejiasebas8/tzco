@@ -64,7 +64,7 @@ const ParticleFlower = () => {
         timeRef.current += 0.0005;
 
         if (ctx) {
-          ctx.fillStyle = 'rgba(240, 238, 230, 0.05)';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
           ctx.fillRect(0, 0, width, height);
         }
       
