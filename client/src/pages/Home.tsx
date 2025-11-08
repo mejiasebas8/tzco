@@ -39,7 +39,7 @@ export default function Home() {
 
       {/* Email Address - aligned with upper corner height */}
       <div className="absolute bottom-[17vh] sm:bottom-[10vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-gray-600 font-mono z-50">
-        info@tzco.com
+        info@tz.co
       </div>
 
       {/* Modal */}
