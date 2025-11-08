@@ -9,10 +9,10 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-screen bg-white text-black overflow-hidden">
-      {/* More Info Link - adjusted for perfect visibility */}
+      {/* More Info Link - aligned with company name on same vertical line */}
       <a 
         href="/more-info"
-        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 bg-transparent px-3 sm:px-4 md:px-6 py-2 md:py-3 cursor-pointer text-sm sm:text-sm md:text-base text-black transition-all duration-300 ease-in-out hover:text-gray-800 z-50 font-mono"
+        className="absolute bottom-[calc(17vh_+_30mm_+_4rem)] sm:bottom-[calc(10vh_+_4rem)] md:bottom-[calc(2rem_+_4rem)] left-4 sm:left-5 md:left-8 text-sm md:text-base text-black transition-all duration-300 ease-in-out hover:text-gray-800 z-50 font-mono font-bold leading-tight"
       >
         More Info
       </a>
