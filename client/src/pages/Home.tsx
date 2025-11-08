@@ -35,14 +35,9 @@ export default function Home() {
         <div className="text-xs sm:text-sm text-gray-600 font-mono">
           Miami, USA
         </div>
-        <div className="text-xs sm:text-sm text-gray-600 font-mono sm:hidden">
+        <div className="text-xs sm:text-sm text-gray-600 font-mono">
           info@tz.co
         </div>
-      </div>
-
-      {/* Email Address - aligned with upper corner height - hidden on mobile */}
-      <div className="hidden sm:block absolute bottom-[17vh] sm:bottom-[10vh] md:bottom-8 right-4 sm:right-5 md:right-8 text-xs sm:text-sm text-gray-600 font-mono z-50">
-        info@tz.co
       </div>
 
       {/* Modal */}
