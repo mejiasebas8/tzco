@@ -29,13 +29,13 @@ export default function Home() {
 
       {/* Company Info - aligned with upper corner height */}
       <div className="absolute bottom-[calc(17vh_+_30mm)] sm:bottom-[10vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50 space-y-1">
-        <div className="text-sm sm:text-sm md:text-base font-mono font-bold text-black">
+        <div className="text-sm md:text-base font-mono font-bold text-black leading-tight">
           The Zeal Company
         </div>
-        <div className="text-xs sm:text-sm text-gray-600 font-mono">
+        <div className="text-sm md:text-base text-gray-600 font-mono leading-tight">
           Miami, USA
         </div>
-        <div className="text-xs sm:text-sm text-gray-600 font-mono">
+        <div className="text-sm md:text-base text-gray-600 font-mono leading-tight">
           info@tz.co
         </div>
       </div>
