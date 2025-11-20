@@ -12,7 +12,7 @@ export default function Home() {
       {/* More Info Link - top left */}
       <a 
         href="/more-info"
-        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-8 text-sm md:text-base text-black transition-all duration-300 ease-in-out hover:text-gray-800 z-50 font-mono"
+        className="absolute top-[4vh] sm:top-[5vh] md:top-8 left-4 sm:left-5 md:left-0 text-sm md:text-base text-black transition-all duration-300 ease-in-out hover:text-gray-800 z-50 font-mono"
       >
         More Info
       </a>
