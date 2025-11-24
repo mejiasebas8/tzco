@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       {/* Company Info - aligned with upper corner height */}
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)_+_5.29vh)] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50 space-y-1 data-testid='company-info'">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)_+_12vh)] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50 space-y-1 data-testid='company-info'">
         <div className="text-sm md:text-base font-mono font-bold text-black leading-tight" data-testid="text-company-name">
           The Zeal Company
         </div>
