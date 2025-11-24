@@ -61,7 +61,7 @@ const ParticleFlower = () => {
       const deltaTime = currentTime - lastFrameTime;
 
       if (deltaTime >= frameInterval) {
-        timeRef.current += 0.0005;
+        timeRef.current += 0.000575;
 
         if (ctx) {
           ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
@@ -77,8 +77,8 @@ const ParticleFlower = () => {
             const angle = Math.atan2(dy, dx);
             const height = particle.z / (FORM_SCALE * 0.4);
 
-            const flow = Math.sin(angle * 2 - timeRef.current * 0.5 + height * 2) * 0.015;
-            const counterFlow = Math.cos(angle * 2 + timeRef.current * 0.5 - height * 2) * 0.015;
+            const flow = Math.sin(angle * 2 - timeRef.current * 0.575 + height * 2) * 0.015;
+            const counterFlow = Math.cos(angle * 2 + timeRef.current * 0.575 - height * 2) * 0.015;
 
             const blend = (Math.sin(height * Math.PI) + 1) * 0.5;
             const combinedFlow = flow * blend + counterFlow * (1 - blend);
@@ -88,7 +88,7 @@ const ParticleFlower = () => {
 
             particle.x = particle.x + (dx * combinedFlow) - (dx * pull);
             particle.y = particle.y + (dy * combinedFlow) - (dy * pull);
-            particle.z = particle.z + Math.sin(timeRef.current * 0.15 + dist * 2) * 0.01;
+            particle.z = particle.z + Math.sin(timeRef.current * 0.1725 + dist * 2) * 0.01;
 
             const depthFactor = 1 + particle.z * 0.5;
             const opacity = 0.35 * depthFactor;
