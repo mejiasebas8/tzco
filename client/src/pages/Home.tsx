@@ -23,7 +23,7 @@ export default function Home() {
       </div>
 
       {/* Particle Container - centered with responsive sizing */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[99vw] h-[99vw] sm:w-[80vw] sm:h-[92vw] md:w-[550px] md:h-[550px] max-w-[99vh] max-h-[99vh] sm:max-w-[77vh] sm:max-h-[88vh] md:max-w-[550px] md:max-h-[550px] flex items-center justify-center z-10">
+      <div className="absolute top-[calc(50%-20vh)] sm:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[99vw] h-[99vw] sm:w-[80vw] sm:h-[92vw] md:w-[550px] md:h-[550px] max-w-[99vh] max-h-[99vh] sm:max-w-[77vh] sm:max-h-[88vh] md:max-w-[550px] md:max-h-[550px] flex items-center justify-center z-10">
         <RandomParticle />
       </div>
 
