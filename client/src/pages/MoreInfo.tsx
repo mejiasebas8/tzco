@@ -17,10 +17,10 @@ const MoreInfo = () => {
       <div className="absolute bottom-[32vh] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 right-4 sm:right-5 md:right-8 z-20 max-w-none sm:max-w-sm md:max-w-md">
         <div className="space-y-2 sm:space-y-3">
           <p className="text-xs sm:text-xs md:text-sm font-mono leading-relaxed text-black">
-            The Zeal Company (TZCO) forms, invests and owns technology businesses with a long term horizon and a company building approach.
+            The Zeal Company (TZCO) is a technology holdings company. We form, invest in and own businesses with a long term horizon and a company building approach.
           </p>
           <p className="text-xs sm:text-xs md:text-sm font-mono leading-relaxed text-black">
-            This is our moment and we have to move with purpose. We are here to amplify human potential by building companies that are enduring and net positive for the world. What we build must be rooted in what is novel, together with what is timeless.
+            This is our moment and we have to move with purpose. We are here to amplify human potential by building companies that are enduring and good for the world. What we build must be rooted in what is novel, together with what is timeless.
           </p>
         </div>
       </div>
