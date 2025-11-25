@@ -20,7 +20,7 @@ const MoreInfo = () => {
             The Zeal Company (TZCO) is a technology holdings company. We form, invest in and own businesses with a long term horizon and a company building approach.
           </p>
           <p className="text-xs sm:text-xs md:text-sm font-mono leading-relaxed text-black text-justify">
-            This is our moment and we have to move with purpose. We are here to amplify human potential by building companies that are enduring and good for the world. What we build must be rooted in what is novel, together with what is timeless.
+            This is our moment and we have to move with purpose. We are here to amplify human potential. What we build must be rooted in what is novel, together with what is timeless.
           </p>
         </div>
       </div>
