@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RandomParticle from '@/components/RandomParticle';
 import CompanyModal from '@/components/CompanyModal';
+import Logo3D from '@/components/Logo3D';
 import { useClock } from '@/hooks/useClock';
 
 export default function Home() {
@@ -16,6 +17,11 @@ export default function Home() {
       >
         More Info
       </a>
+
+      {/* 3D Logo - centered at top between More Info and Time */}
+      <div className="absolute top-[2vh] sm:top-[3vh] md:top-4 left-1/2 transform -translate-x-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] z-50">
+        <Logo3D />
+      </div>
 
       {/* Time Clock - aligned perfectly with More Info link */}
       <div className="absolute top-[4vh] sm:top-[5vh] md:top-8 right-4 sm:right-5 md:right-8 text-sm sm:text-sm md:text-base text-black font-mono z-50">
