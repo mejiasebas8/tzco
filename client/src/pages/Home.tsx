@@ -19,7 +19,7 @@ export default function Home() {
       </a>
 
       {/* 3D Logo - positioned above company info section */}
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh-10px)] sm:bottom-[calc(5vh-10px)] md:bottom-[calc(32px-10px)] left-[-54px] sm:left-[-50px] md:left-[-38px] w-[192px] h-[192px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh-20px)] sm:bottom-[calc(5vh-20px)] md:bottom-[calc(32px-20px)] left-[-54px] sm:left-[-50px] md:left-[-38px] w-[192px] h-[192px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
         <Logo3D />
       </div>
 
