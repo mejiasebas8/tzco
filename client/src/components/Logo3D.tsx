@@ -113,7 +113,7 @@ export default function Logo3D() {
     pivotGroup.add(logoGroup);
     
     const maxDim = Math.max(size.x, size.y);
-    const scale = 120 / maxDim;
+    const scale = 360 / maxDim;
     pivotGroup.scale.set(scale, -scale, scale);
     
     pivotGroup.position.set(0, 0, 0);

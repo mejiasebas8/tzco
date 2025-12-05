@@ -19,7 +19,7 @@ export default function Home() {
       </a>
 
       {/* 3D Logo - centered at top between More Info and Time */}
-      <div className="absolute top-[2vh] sm:top-[3vh] md:top-4 left-1/2 transform -translate-x-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] z-50">
+      <div className="absolute top-[2vh] sm:top-[3vh] md:top-4 left-1/2 transform -translate-x-1/2 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] z-50">
         <Logo3D />
       </div>
 
