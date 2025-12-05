@@ -18,8 +18,8 @@ export default function Home() {
         More Info
       </a>
 
-      {/* 3D Logo - centered at top between More Info and Time */}
-      <div className="absolute top-[calc(4vh+25px)] sm:top-[calc(5vh+25px)] md:top-[calc(32px+25px)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[192px] h-[192px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
+      {/* 3D Logo - positioned above company info section */}
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+80px)] sm:bottom-[calc(5vh+80px)] md:bottom-[calc(32px+80px)] left-4 sm:left-5 md:left-8 w-[192px] h-[192px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
         <Logo3D />
       </div>
 
