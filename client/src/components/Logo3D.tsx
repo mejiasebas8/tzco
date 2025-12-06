@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
@@ -6,6 +6,7 @@ export default function Logo3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationFrameRef = useRef<number | null>(null);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -19,7 +20,19 @@ export default function Logo3D() {
     camera.position.set(0, 0, 600);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch (e) {
+      setWebglSupported(false);
+      return;
+    }
+    
+    if (!renderer.getContext()) {
+      setWebglSupported(false);
+      return;
+    }
+    
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
@@ -149,6 +162,17 @@ export default function Logo3D() {
       }
     };
   }, []);
+
+  if (!webglSupported) {
+    return (
+      <div 
+        className="w-full h-full flex items-center justify-center"
+        data-testid="logo-3d-fallback"
+      >
+        <span className="font-mono text-2xl font-bold text-black">TZCO</span>
+      </div>
+    );
+  }
 
   return (
     <div 
