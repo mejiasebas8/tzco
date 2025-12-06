@@ -19,7 +19,7 @@ export default function Home() {
       </a>
 
       {/* 3D Logo - positioned above company info section */}
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+20px)] sm:bottom-[calc(5vh-20px)] md:bottom-[calc(32px-20px)] left-[-31px] sm:left-[-40px] md:left-[-28px] w-[154px] h-[154px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+25px)] sm:bottom-[calc(5vh-20px)] md:bottom-[calc(32px-20px)] left-[-31px] sm:left-[-40px] md:left-[-28px] w-[154px] h-[154px] sm:w-[240px] sm:h-[240px] md:w-[288px] md:h-[288px] z-50">
         <Logo3D />
       </div>
 
@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* Company Info - aligned with upper corner height */}
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+5px)] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50 space-y-1 data-testid='company-info'">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+10px)] sm:bottom-[5vh] md:bottom-8 left-4 sm:left-5 md:left-8 z-50 space-y-1 data-testid='company-info'">
         <div className="text-sm md:text-base font-mono font-bold text-black leading-tight" data-testid="text-company-name">
           The Zeal Company
         </div>
@@ -44,7 +44,7 @@ export default function Home() {
       </div>
 
       {/* Email - bottom right, aligned with Miami, USA */}
-      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+5px)] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 z-50" data-testid="text-email">
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+10px)] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 z-50" data-testid="text-email">
         <div className="text-sm md:text-base text-gray-600 font-mono leading-tight">
           info@tz.co
         </div>
