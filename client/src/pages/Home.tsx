@@ -41,7 +41,11 @@ export default function Home() {
         <div className="text-sm md:text-base text-gray-600 font-mono leading-tight" data-testid="text-location">
           Miami, USA
         </div>
-        <div className="text-sm md:text-base text-gray-600 font-mono leading-tight" data-testid="text-email">
+      </div>
+
+      {/* Email - bottom right, aligned with Miami, USA */}
+      <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+12vh+5px)] sm:bottom-[5vh] md:bottom-8 right-4 sm:right-5 md:right-8 z-50" data-testid="text-email">
+        <div className="text-sm md:text-base text-gray-600 font-mono leading-tight">
           info@tz.co
         </div>
       </div>
