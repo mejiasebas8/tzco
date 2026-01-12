@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Design Comparison - Before vs After</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Courier New', monospace;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #3a3a3a;
+        }
+
+        .section.before {
+            border-color: #e74c3c;
+        }
+
+        .section.after {
+            border-color: #2ecc71;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid currentColor;
+        }
+
+        .section.before h2 {
+            color: #e74c3c;
+        }
+
+        .section.after h2 {
+            color: #2ecc71;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 450px;
+            background: #fff;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            background: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #444;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #2ecc71;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .control-group select {
+            width: 100%;
+            padding: 8px;
+            background: #444;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .stat {
+            background: #333;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .stat strong {
+            color: #fff;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .feature-list li {
+            padding: 10px;
+            margin: 8px 0;
+            background: #333;
+            border-radius: 5px;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .feature-list.problems li {
+            border-left-color: #e74c3c;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .comparison-table th {
+            background: #333;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:hover {
+            background: #333;
+        }
+
+        .code-snippet {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 3px solid #2ecc71;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .code-snippet.before {
+            border-left-color: #e74c3c;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        .code-function {
+            color: #dcdcaa;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 1.2em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #2ecc71;
+            color: #fff;
+            border-radius: 12px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge.issue {
+            background: #e74c3c;
+        }
+
+        .fps-counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #2ecc71;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Particle Design Improvements</h1>
+        <p>Interactive comparison: Current design vs. Proposed improvements</p>
+    </div>
+
+    <div class="container">
+        <!-- BEFORE Section -->
+        <div class="section before">
+            <h2>❌ Before (Current Design)</h2>
+
+            <div class="canvas-container" id="before-container">
+                <div class="fps-counter" id="before-fps">FPS: --</div>
+                <canvas id="before-canvas"></canvas>
+            </div>
+
+            <div class="stats">
+                <div class="stat"><strong>Particles:</strong> <span id="before-particle-count">30,000</span></div>
+                <div class="stat"><strong>FPS Target:</strong> <span id="before-fps-target">10</span></div>
+                <div class="stat"><strong>Quality:</strong> Fixed</div>
+                <div class="stat"><strong>Configurability:</strong> None</div>
+            </div>
+
+            <h3 style="margin-top: 20px; color: #e74c3c;">Issues:</h3>
+            <ul class="feature-list problems">
+                <li><span class="badge issue">Type Safety</span> Uses <code>any[]</code> for particles</li>
+                <li><span class="badge issue">Performance</span> Limited to 10 FPS</li>
+                <li><span class="badge issue">Hard-coded</span> No props or configuration</li>
+                <li><span class="badge issue">Maintainability</span> Magic numbers throughout</li>
+                <li><span class="badge issue">Styling</span> Inline styles instead of Tailwind</li>
+                <li><span class="badge issue">Accessibility</span> No ARIA labels or loading states</li>
+            </ul>
+        </div>
+
+        <!-- AFTER Section -->
+        <div class="section after">
+            <h2>✅ After (Improved Design)</h2>
+
+            <div class="canvas-container" id="after-container">
+                <div class="fps-counter" id="after-fps">FPS: --</div>
+                <canvas id="after-canvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="quality">Quality Preset:</label>
+                    <select id="quality">
+                        <option value="low">Low (15k particles, 30 FPS)</option>
+                        <option value="medium" selected>Medium (30k particles, 45 FPS)</option>
+                        <option value="high">High (45k particles, 60 FPS)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="opacity">Opacity: <span id="opacity-value">0.35</span></label>
+                    <input type="range" id="opacity" min="0.1" max="0.8" step="0.05" value="0.35">
+                </div>
+
+                <div class="control-group">
+                    <label for="speed">Animation Speed: <span id="speed-value">1.0</span>x</label>
+                    <input type="range" id="speed" min="0.2" max="3.0" step="0.1" value="1.0">
+                </div>
+
+                <div class="control-group">
+                    <label for="particle-size">Particle Size: <span id="size-value">0.6</span></label>
+                    <input type="range" id="particle-size" min="0.3" max="1.5" step="0.1" value="0.6">
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat"><strong>Particles:</strong> <span id="after-particle-count">30,000</span></div>
+                <div class="stat"><strong>FPS Target:</strong> <span id="after-fps-target">45</span></div>
+                <div class="stat"><strong>Quality:</strong> <span id="after-quality">Medium</span></div>
+                <div class="stat"><strong>Configurable:</strong> ✓ Yes</div>
+            </div>
+
+            <h3 style="margin-top: 20px; color: #2ecc71;">Improvements:</h3>
+            <ul class="feature-list">
+                <li><span class="badge">Type Safe</span> Full TypeScript interfaces</li>
+                <li><span class="badge">Performance</span> Up to 60 FPS with quality presets</li>
+                <li><span class="badge">Configurable</span> Props for all settings</li>
+                <li><span class="badge">Clean Code</span> Constants extracted, no magic numbers</li>
+                <li><span class="badge">Tailwind</span> Proper CSS utility classes</li>
+                <li><span class="badge">A11y</span> ARIA labels, loading states, error handling</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Code Comparison Section -->
+    <div class="section" style="grid-column: 1 / -1;">
+        <h2 style="color: #3498db;">📊 Technical Comparison</h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Before</th>
+                    <th>After</th>
+                    <th>Benefit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>TypeScript</strong></td>
+                    <td>Partial (any[] types)</td>
+                    <td>Full type safety</td>
+                    <td>Catch errors at compile time</td>
+                </tr>
+                <tr>
+                    <td><strong>Props</strong></td>
+                    <td>None</td>
+                    <td>Configurable via props</td>
+                    <td>Reusable across different contexts</td>
+                </tr>
+                <tr>
+                    <td><strong>Constants</strong></td>
+                    <td>Hard-coded values</td>
+                    <td>Extracted to constants file</td>
+                    <td>Easy to maintain and adjust</td>
+                </tr>
+                <tr>
+                    <td><strong>Performance</strong></td>
+                    <td>Fixed 10 FPS</td>
+                    <td>Quality presets (30-60 FPS)</td>
+                    <td>Better UX, device-adaptive</td>
+                </tr>
+                <tr>
+                    <td><strong>Optimization</strong></td>
+                    <td>Basic</td>
+                    <td>useCallback, useMemo, memo</td>
+                    <td>Prevent unnecessary re-renders</td>
+                </tr>
+                <tr>
+                    <td><strong>Error Handling</strong></td>
+                    <td>None</td>
+                    <td>Try-catch, error states</td>
+                    <td>Graceful degradation</td>
+                </tr>
+                <tr>
+                    <td><strong>Loading States</strong></td>
+                    <td>None</td>
+                    <td>Built-in indicators</td>
+                    <td>Better perceived performance</td>
+                </tr>
+                <tr>
+                    <td><strong>Accessibility</strong></td>
+                    <td>None</td>
+                    <td>ARIA labels, semantic HTML</td>
+                    <td>Inclusive design</td>
+                </tr>
+                <tr>
+                    <td><strong>Code Structure</strong></td>
+                    <td>Monolithic</td>
+                    <td>Separated concerns (hooks, types)</td>
+                    <td>Easier to test and maintain</td>
+                </tr>
+                <tr>
+                    <td><strong>Styling</strong></td>
+                    <td>Inline styles</td>
+                    <td>Tailwind CSS utilities</td>
+                    <td>Consistent design system</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-top: 30px; color: #3498db;">Code Example: Before vs After</h3>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div>
+                <h4 style="color: #e74c3c; margin-bottom: 10px;">Before: No type safety</h4>
+                <div class="code-snippet before">
+<span class="code-keyword">const</span> particles: <span class="code-keyword">any</span>[] = [];
+<span class="code-comment">// No configuration options</span>
+<span class="code-keyword">const</span> PARTICLE_COUNT = <span class="code-string">30000</span>;
+<span class="code-comment">// Magic number, no explanation</span>
+<span class="code-keyword">const</span> targetFPS = <span class="code-string">10</span>;
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: #2ecc71; margin-bottom: 10px;">After: Fully typed with config</h4>
+                <div class="code-snippet">
+<span class="code-keyword">interface</span> <span class="code-function">Particle</span> {
+  x: <span class="code-keyword">number</span>;
+  y: <span class="code-keyword">number</span>;
+  z: <span class="code-keyword">number</span>;
+  velocity?: { x: <span class="code-keyword">number</span>; y: <span class="code-keyword">number</span> };
+}
+
+<span class="code-keyword">const</span> config = {
+  particleCount: <span class="code-string">30000</span>,
+  targetFPS: <span class="code-string">60</span>,
+  quality: <span class="code-string">'medium'</span>
+};
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple 2D Particle Flower Animation
+        class ParticleFlowerDemo {
+            constructor(canvasId, config = {}) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d', { alpha: false });
+                this.particles = [];
+                this.time = 0;
+                this.animationFrame = null;
+
+                this.config = {
+                    particleCount: config.particleCount || 30000,
+                    formScale: config.formScale || 2.4,
+                    targetFPS: config.targetFPS || 10,
+                    opacity: config.opacity || 0.35,
+                    speed: config.speed || 1.0,
+                    particleSize: config.particleSize || 0.6,
+                    ...config
+                };
+
+                this.fpsCounter = document.getElementById(config.fpsCounterId);
+                this.lastFrameTime = 0;
+                this.frameCount = 0;
+                this.fps = 0;
+
+                this.init();
+            }
+
+            init() {
+                this.canvas.width = 550;
+                this.canvas.height = 550;
+                this.centerX = this.canvas.width / 2;
+                this.centerY = this.canvas.height / 2;
+
+                this.initializeParticles();
+                this.animate(0);
+            }
+
+            initializeParticles() {
+                this.particles = [];
+                const { particleCount, formScale } = this.config;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const theta = Math.random() * Math.PI * 2;
+                    const r = Math.pow(Math.random(), 0.5) * formScale * 0.5 * 150;
+                    const height = (Math.random() * 2 - 1) * formScale * 0.3;
+                    const angle = theta;
+                    const dist = r / 150;
+
+                    const flow = Math.sin(angle * 2 + height * 2) * 0.03;
+                    const counterFlow = Math.cos(angle * 2 - height * 2) * 0.03;
+                    const blend = (Math.sin(height * Math.PI) + 1) * 0.5;
+                    const combinedFlow = flow * blend + counterFlow * (1 - blend);
+
+                    const dx = r * Math.cos(theta);
+                    const dy = r * Math.sin(theta);
+                    const containment = Math.pow(Math.min(1, dist / (formScale * 0.8)), 4);
+                    const pull = containment * 0.1;
+
+                    this.particles.push({
+                        x: this.centerX + dx + (dx * combinedFlow) - (dx * pull),
+                        y: this.centerY + dy + (dy * combinedFlow) - (dy * pull),
+                        z: height,
+                        initialR: r,
+                        initialTheta: theta,
+                        initialHeight: height
+                    });
+                }
+            }
+
+            animate(currentTime) {
+                const frameInterval = 1000 / this.config.targetFPS;
+                const deltaTime = currentTime - this.lastFrameTime;
+
+                if (deltaTime >= frameInterval) {
+                    this.time += 0.000575 * this.config.speed;
+
+                    // Clear canvas with trail effect
+                    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+                    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    // Update and draw particles
+                    this.particles.forEach(particle => {
+                        const dx = particle.x - this.centerX;
+                        const dy = particle.y - this.centerY;
+                        const dist = Math.sqrt(dx * dx + dy * dy) / 150;
+                        const angle = Math.atan2(dy, dx);
+                        const height = particle.z / (this.config.formScale * 0.4);
+
+                        const flow = Math.sin(angle * 2 - this.time * 0.575 + height * 2) * 0.015;
+                        const counterFlow = Math.cos(angle * 2 + this.time * 0.575 - height * 2) * 0.015;
+                        const blend = (Math.sin(height * Math.PI) + 1) * 0.5;
+                        const combinedFlow = flow * blend + counterFlow * (1 - blend);
+
+                        const containment = Math.pow(Math.min(1, dist / (this.config.formScale * 0.8)), 4);
+                        const pull = containment * 0.1;
+
+                        particle.x = particle.x + (dx * combinedFlow) - (dx * pull);
+                        particle.y = particle.y + (dy * combinedFlow) - (dy * pull);
+                        particle.z = particle.z + Math.sin(this.time * 0.1725 + dist * 2) * 0.01;
+
+                        const depthFactor = 1 + particle.z * 0.5;
+                        const opacity = this.config.opacity * depthFactor;
+                        const size = Math.max(0.001, this.config.particleSize * depthFactor);
+
+                        this.ctx.beginPath();
+                        this.ctx.arc(particle.x, particle.y, size, 0, Math.PI * 2);
+                        this.ctx.fillStyle = `rgba(51, 51, 51, ${opacity})`;
+                        this.ctx.fill();
+                    });
+
+                    this.lastFrameTime = currentTime - (deltaTime % frameInterval);
+
+                    // Update FPS counter
+                    this.frameCount++;
+                    if (this.frameCount % 10 === 0) {
+                        this.fps = Math.round(1000 / deltaTime);
+                        if (this.fpsCounter) {
+                            this.fpsCounter.textContent = `FPS: ${this.fps}`;
+                        }
+                    }
+                }
+
+                this.animationFrame = requestAnimationFrame((t) => this.animate(t));
+            }
+
+            updateConfig(newConfig) {
+                this.config = { ...this.config, ...newConfig };
+
+                // Reinitialize if particle count changed
+                if (newConfig.particleCount !== undefined) {
+                    this.initializeParticles();
+                }
+            }
+
+            destroy() {
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                }
+            }
+        }
+
+        // Initialize BEFORE demo (current design)
+        const beforeDemo = new ParticleFlowerDemo('before-canvas', {
+            particleCount: 30000,
+            targetFPS: 10,
+            opacity: 0.35,
+            speed: 1.0,
+            particleSize: 0.6,
+            fpsCounterId: 'before-fps'
+        });
+
+        // Initialize AFTER demo (improved design)
+        let afterDemo = new ParticleFlowerDemo('after-canvas', {
+            particleCount: 30000,
+            targetFPS: 45,
+            opacity: 0.35,
+            speed: 1.0,
+            particleSize: 0.6,
+            fpsCounterId: 'after-fps'
+        });
+
+        // Quality presets
+        const qualityPresets = {
+            low: { particleCount: 15000, targetFPS: 30 },
+            medium: { particleCount: 30000, targetFPS: 45 },
+            high: { particleCount: 45000, targetFPS: 60 }
+        };
+
+        // Setup controls for AFTER demo
+        document.getElementById('quality').addEventListener('change', (e) => {
+            const preset = qualityPresets[e.target.value];
+            afterDemo.destroy();
+            afterDemo = new ParticleFlowerDemo('after-canvas', {
+                ...afterDemo.config,
+                ...preset,
+                fpsCounterId: 'after-fps'
+            });
+
+            document.getElementById('after-particle-count').textContent = preset.particleCount.toLocaleString();
+            document.getElementById('after-fps-target').textContent = preset.targetFPS;
+            document.getElementById('after-quality').textContent =
+                e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+        });
+
+        document.getElementById('opacity').addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            afterDemo.updateConfig({ opacity: value });
+            document.getElementById('opacity-value').textContent = value.toFixed(2);
+        });
+
+        document.getElementById('speed').addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            afterDemo.updateConfig({ speed: value });
+            document.getElementById('speed-value').textContent = value.toFixed(1);
+        });
+
+        document.getElementById('particle-size').addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            afterDemo.updateConfig({ particleSize: value });
+            document.getElementById('size-value').textContent = value.toFixed(1);
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            beforeDemo.destroy();
+            afterDemo.destroy();
+        });
+    </script>
+</body>
+</html>
